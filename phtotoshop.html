@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="yt.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+
+        }
+
+        body.hidden {
+            overflow: hidden;
+        }
+
+
+
+        header {
+            width: 100%;
+            height: auto;
+            min-height: 100vh;
+        }
+
+        .navWapper {
+            width: 100%;
+            height: auto;
+            display: flex;
+            background: black;
+        }
+
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+
+        }
+
+        .logo {
+            flex-basis: 18%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            padding: 20px 0;
+            font-weight: bold;
+            letter-spacing: 5px;
+        }
+
+        #blue {
+            color: #74b9ff;
+        }
+
+        .navMenuWrapper {
+            flex-basis: 82%;
+            width: 82%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .menu {
+            width: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px;
+            margin: 10px;
+
+        }
+
+        .menu a:first-child {
+            border-bottom: 2px solid #74b9ff;
+        }
+
+
+        .socialmedia_icon {
+            width: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .socialmedia_icon a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 22px;
+        }
+
+        .mobile-menu {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-size: 24px;
+            padding-right: 30px;
+            display: none;
+        }
+
+        .mobile-menu.open .fa-bars:before {
+            content: '\f00d';
+        }
+
+
+
+
+
+
+        .container {
+            /* display: none !important; */
+            width: 100%;
+            min-height: calc(100vh - 105px);
+            height: auto;
+            display: grid;
+            place-items: center;
+            color: #fff;
+            background: black;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 80% 80%, 0% 100%);
+        }
+
+        .contentWrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 2rem;
+            padding: 20px;
+        }
+
+        .left {
+            flex-basis: 50%;
+        }
+
+        .left img {
+            width: 90%;
+        }
+
+        .right {
+            flex-basis: 50%;
+            max-width: 400px;
+            margin-top: 2rem;
+
+        }
+
+        .right h1 {
+            color: #74b9ff;
+            font-size: 50px;
+
+        }
+
+        .right p {
+            font-size: 25px;
+            margin: 10px 0px;
+        }
+
+        .btn {
+            background: transparent;
+            padding: 10px 20px;
+            color: #74b9ff;
+            border: 1px solid #74b9ff;
+            border-radius: 8px;
+        }
+
+
+
+
+
+
+
+
+        @media screen and (max-width: 1021px) {
+            .navWapper {
+                border-bottom: 2px solid rgba(242, 242, 242, 0.138);
+            }
+
+            .logo {
+                font-size: 25px;
+                align-items: flex-start;
+                width: 50%;
+                padding-left: 28px;
+            }
+
+            .navMenuWrapper {
+                position: absolute;
+                top: 72px;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                flex-basis: 100%;
+                display: none;
+                flex-direction: column;
+                height: calc(100vh - 72px);
+                background-color: black;
+                z-index: 10;
+
+            }
+
+            .navMenuWrapper.open {
+                display: flex;
+            }
+
+            .menu {
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 8%;
+            }
+
+            .socialmedia_icon {
+                width: 100%;
+                position: absolute;
+                bottom: 18%;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+
+        }
+
+        @media screen and (max-width: 900px) {
+            .container {
+                min-height: 800px;
+            }
+
+            .left {
+                order: 1;
+                flex-basis: 100%;
+            }
+
+            .right {
+                order: 0;
+                flex-basis: 100%;
+            }
+
+            .left img {
+                width: 100%;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+        #about {
+            padding: 80px 0px;
+        }
+
+        .about-row {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .about-left-col {
+            flex-basis: 50%;
+            padding: 20px;
+        }
+
+        .about-right-col {
+            flex-basis: 50%;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .about-right-col img {
+            width: 100%;
+            height: fit-content;
+            max-width: 350px;
+        }
+
+        .about-left-col {
+            max-width: 400px;
+            margin: auto;
+
+        }
+
+        .about-left-col h1 {
+            font-size: 50px;
+
+        }
+
+        .about-left-col p {
+            font-size: 20px;
+            text-align: justify;
+            margin: 15px 0px;
+
+        }
+
+        .about-btn {
+            padding: 10px;
+            margin: 10px 0px;
+            color: #fff;
+            border: none;
+            background-color: #74b9ff;
+        }
+
+
+        @media screen and (max-width: 756px) {
+            .about-row {
+                flex-direction: column;
+            }
+
+            .about-left-col {
+                flex-basis: 100%;
+            }
+
+            .about-right-col {
+                flex-basis: 100%;
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #Sign-up {
+            height: auto;
+            background: rgba(0, 0, 0, 0.1);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 80% 80%, 0% 100%);
+        }
+
+
+        .signup-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            padding: 60px 0 100px;
+        }
+
+        .signup-left-col {
+            flex-basis: 40%;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .signup-left-col img {
+            width: 100%;
+            min-width: 295px;
+            max-width: 420px;
+        }
+
+        .signup-right-col {
+            flex-basis: 59%;
+            padding: 20px;
+        }
+
+        .signup-right-col h1 {
+            font-size: 80px;
+        }
+
+        .signup-right-col h2 {
+            font-size: 45px;
+            letter-spacing: 60px;
+            color: rgba(0, 0, 0, 0.3);
+            margin: 10px 0px;
+
+        }
+
+
+
+        @media screen and (max-width: 756px) {
+            .signup-row {
+                flex-direction: column;
+            }
+
+            .signup-left-col {
+                flex-basis: 100%;
+            }
+
+            .signup-right-col {
+                flex-basis: 100%;
+                margin: auto;
+                text-align: center;
+            }
+
+            .signup-right-col h1 {
+                font-size: 50px;
+            }
+
+            .signup-right-col h2 {
+                font-size: 25px;
+                letter-spacing: 20px;
+
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #services {
+            padding: 50px 0px 80px;
+        }
+
+        .services-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .services-info h1 {
+            font-size: 50px;
+        }
+
+        .services-info p {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .services-roe {
+            display: grid;
+            grid-template-columns: repeat(3, 200px);
+            grid-auto-rows: minmax(150px, auto);
+            grid-gap: 3em;
+            justify-content: center;
+            padding-top: 20px;
+        }
+
+        .services-box {
+            box-shadow: 2px 3px 5px grey;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .services-box h2 {
+            margin: 10px 0;
+        }
+
+        .services-box i {
+            background: #0984e3;
+            color: #fff;
+            font-size: 30px;
+            padding: 10px;
+            margin-top: -20px;
+        }
+
+        @media screen and (max-width: 800px) {
+            .services-roe {
+                grid-template-columns: repeat(2, 250px);
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .services-roe {
+                grid-template-columns: repeat(1, 250px);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #members {
+            padding: 100px 50px;
+            background: url(Dumble.jpeg);
+            background-size: 35% 35%;
+            background-repeat: no-repeat;
+            background-position: top right;
+        }
+
+        .members-cards {
+            text-align: center;
+            padding-top: 50px;
+            width: 100%;
+            margin: auto;
+            display: grid;
+            place-items: center;
+        }
+
+
+        .members-cards img {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .members-cards img:nth-last-child(1) {
+            max-width: 200px;
+            width: 100%;
+        }
+
+        .members-cards p {
+            margin: 20px 0px;
+        }
+
+        .members-cards h2 {
+            margin: 20px 0px;
+        }
+
+
+
+
+
+
+
+
+        #works {
+            height: auto;
+            padding-top: 50px;
+            padding-bottom: 100px;
+            background: rgba(0, 0, 0, 0.1);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 80% 80%, 0% 100%);
+        }
+
+        .work-box {
+            box-shadow: 2px 3px 5px grey;
+        }
+
+        .work-box img {
+            width: 100%;
+            height: 100%;
+        }
+
+        @media screen and (max-width: 810px) {
+            #works {
+                clip-path: none;
+            }
+        }
+
+
+
+
+
+        #contact {
+            padding: 60px 0px;
+
+        }
+
+        .contact-roe {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .contact-left-col {
+            flex-basis: 50%;
+            padding-top: 50px;
+
+        }
+
+        .contact-right-col {
+            flex-basis: 50%;
+            max-width: 450px;
+            margin: auto;
+        }
+
+        .contact-right-col i {
+            font-size: 20px;
+            padding: 10px;
+            background: #74b9ff;
+            color: #fff;
+        }
+
+        .contact-right-col p {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .form {
+            width: 70%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .form input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 10px;
+
+        }
+
+        .contact-btn {
+            background-color: black;
+            color: #fff;
+            padding: 10px;
+            width: 50%;
+            border: none;
+        }
+
+        @media screen and (max-width: 850px) {
+            .contact-left-col {
+                flex-basis: 100%;
+                padding-top: 50px;
+
+            }
+
+            .contact-right-col {
+                flex-basis: 90%;
+                max-width: 450px;
+                margin-top: 80px;
+            }
+
+            .form {
+                width: 95%;
+                max-width: 500px;
+            }
+
+            .form input[type="text"] {
+                width: 95%;
+            }
+
+            textarea {
+                width: 95%;
+            }
+        }
+
+
+
+        #footer {
+            background: black;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="navWapper">
+            <nav>
+                <div class="logo">
+                    <span id="blue">AK</span>FIT
+                </div>
+
+                <div class="navMenuWrapper">
+                    <div class="menu">
+                        <a href="#">Home</a>
+                        <a href="#">About</a>
+                        <a href="#">Services</a>
+                        <a href="#">Client</a>
+                        <a href="#">Our work</a>
+                        <a href="#">Contact</a>
+                    </div>
+                    <div class="socialmedia_icon">
+
+                        <a href="#" class="fa-brands fa-facebook-f"></a>
+                        <a href="#" class="fa-brands fa-twitter"></a>
+                        <a href="#" class="fa-brands fa-google"></a>
+                    </div>
+                </div>
+
+                <div class="mobile-menu">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+
+
+
+
+
+        <div class="container">
+            <div class="contentWrapper">
+                <div class="left">
+                    <img src="cse_1.jpeg" alt="">
+
+                </div>
+                <div class="right">
+
+                    <p>I am a</p>
+                    <h1>Gym Trainer</h1>
+                    <p>From Rajasthan,doing gym is good for healthy life. It helps our body to fit .It release stress
+                        from
+                        our mind</p>
+                    <button class="btn">Join us</button>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+
+
+
+
+    <section id="about">
+        <div class="about-row">
+            <div class="about-left-col">
+                <h1>About <span id="blue">me</span></h1>
+                <p id="p-title">I am a Gym Trainer</p>
+                <p>
+                    From Rajasthan,doing gym is good for healthy life.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos corrupti ullam fuga? Delectus alias
+                    corrupti temporibus eius debitis libero modi adipisci maxime dolore quia. Vitae odio eveniet alias
+                    voluptas eligendi?
+                </p>
+                <button class="about-btn">Read More</button>
+
+            </div>
+            <div class="about-right-col">
+                <img src="trainer.jpeg" alt="">
+
+            </div>
+        </div>
+    </section>
+
+
+    <section id="Sign-up">
+        <div class="signup-row">
+            <div class="signup-left-col">
+                <img src="yt_1.jpeg" alt="">
+            </div>
+            <div class="signup-right-col">
+                <h1>BEING <span id="blue">BODY</span></h1>
+                <h2>BUILDER</h2>
+                <button class="about-btn">Signup</button>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="services">
+        <div class="services-info">
+            <h1>Our <span id="blue">Services</span></h1>
+            <p>What we Provide</p>
+        </div>
+        <div class="services-roe">
+            <div class="services-box">
+                <i class="fa fa-suitcase" aria-hidden="true"></i>
+                <h2>
+                    Cardio
+                </h2>
+                <p>From Rajasthan,doing gym is good for healthy life.</p>
+            </div>
+            <div class="services-box">
+                <i class="fa fa-suitcase" aria-hidden="true"></i>
+                <h2>
+                    Cardio
+                </h2>
+                <p>From Rajasthan,doing gym is good for healthy life.</p>
+            </div>
+            <div class="services-box">
+                <i class="fa fa-suitcase" aria-hidden="true"></i>
+                <h2>
+                    Cardio
+                </h2>
+                <p>From Rajasthan,doing gym is good for healthy life.</p>
+            </div>
+            <div class="services-box">
+                <i class="fa fa-suitcase" aria-hidden="true"></i>
+                <h2>
+                    Cardio
+                </h2>
+                <p>From Rajasthan,doing gym is good for healthy life.</p>
+            </div>
+            <div class="services-box">
+                <i class="fa fa-suitcase" aria-hidden="true"></i>
+                <h2>
+                    Cardio
+                </h2>
+                <p>From Rajasthan,doing gym is good for healthy life.</p>
+            </div>
+            <div class="services-box">
+                <i class="fa fa-suitcase" aria-hidden="true"></i>
+                <h2>
+                    Cardio
+                </h2>
+                <p>From Rajasthan,doing gym is good for healthy life.</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section id="members">
+        <div class="services-info">
+            <h1>Our <span id="blue">Members</span></h1>
+            <p>What our gym members says</p>
+        </div>
+        <div class="members-cards">
+            <img src="client.jpeg" alt="">
+            <p>From Rajasthan,doing gym is good for healthy life. It helps our body to fit .It release stress from
+                our mind</p>
+            <h2>* Jacky D'Souza, Gym Client</h2>
+            <img src="s_media.png" alt="">
+        </div>
+
+    </section>
+
+
+    <section id="works">
+        <div class="services-info">
+            <h1>Our <span id="blue">Works</span></h1>
+            <p>What we provide</p>
+        </div>
+        <div class="services-roe">
+            <div class="work-box">
+                <img src="w_box1.jpeg" alt="">
+            </div>
+            <div class="work-box">
+                <img src="w_box2.jpeg" alt="">
+            </div>
+            <div class="work-box">
+                <img src="w_box3.jpeg" alt="">
+            </div>
+            <div class="work-box">
+                <img src="w_box4.jpeg" alt="">
+            </div>
+            <div class="work-box">
+                <img src="w_box5.jpeg" alt="">
+            </div>
+            <div class="work-box">
+                <img src="w_box6.jpeg" alt="">
+            </div>
+        </div>
+    </section>
+
+
+
+    <section id="contact">
+        <div class="services-info">
+            <h1>Get in <span id="blue">Touch</span></h1>
+            <p>We are Avaialable</p>
+        </div>
+        <div class="contact-roe">
+            <div class="contact-left-col">
+                <div class="form">
+                    <input type="text" name="" placeholder="Email">
+                    <input type="text" name="" placeholder="Subject"><br>
+                    <textarea cols="40" rows="10" placeholder="Message"></textarea>
+                    <br>
+                    <button class="contact-btn">Send</button>
+                </div>
+            </div>
+            <div class="contact-right-col">
+                <h1>
+                    <i class="fa-solid fa-envelope-open" aria-hidden="true"></i>
+                    Email
+                </h1>
+                <p>xyz3089741@gmail.com</p>
+                <br>
+                <h1>
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    Mobile
+                </h1>
+                <p>8598726252,9192938458</p>
+                <br>
+                <h1>
+                    <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                    Address
+                </h1>
+                <p>Near Rajiv Nagar <br>
+                    Complex no.1485 , Bikaner , Rajasthan</p>
+                <br>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="footer">
+        <!-- <h1>BP <span id="blue">FG</span></h1> -->
+        <p>&copy; All Rights Reserved By AK FITNESS</p>
+        <!-- <img src="s_media_2.png" alt=""> -->
+    </section>
+
+
+
+
+    <script>
+        var $mobileBtn = document.querySelector("div.mobile-menu");
+        $mobileBtn.addEventListener("click", function () {
+            this.classList.toggle("open");
+            document.querySelector("div.navMenuWrapper").classList.toggle("open");
+            document.body.classList.toggle("hidden");
+        });
+    </script>
+
+
+</body>
+
+</html>
