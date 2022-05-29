@@ -325,7 +325,17 @@
             color: #fff;
             border: none;
             background-color: #74b9ff;
+            box-shadow: #0984e3 4px 4px 0px;
+            border-radius: 8px;
+            transition: transform 200ms, box-shadow 200ms;
+
         }
+
+        .about-btn:active {
+            transform: translateY(4px) translateX(4px);
+            box-shadow: #094c66 0px 0px 0px;
+        }
+
 
 
         @media screen and (max-width: 756px) {
@@ -651,6 +661,15 @@
             padding: 10px;
             width: 50%;
             border: none;
+            box-shadow: #0984e3 4px 4px 0px;
+            border-radius: 8px;
+            transition: transform 200ms, box-shadow 200ms;
+
+        }
+
+        .contact-btn:active {
+            transform: translateY(4px) translateX(4px);
+            box-shadow: #094c66 0px 0px 0px;
         }
 
         @media screen and (max-width: 850px) {
