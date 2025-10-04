@@ -171,7 +171,6 @@
   </div>
 
   <script>
-    // Simple client-side validation + modal
     (function(){
       const form = document.getElementById('contactForm');
       const modal = document.getElementById('successModal');
@@ -179,7 +178,6 @@
 
       function validate(){
         let ok = true;
-        // name
         const name = document.getElementById('name');
         const errName = document.getElementById('err-name');
         if(!name.value.trim()){ ok = false; name.classList.add('error'); errName.textContent = 'Please enter your name'; }
