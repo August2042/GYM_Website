@@ -2,267 +2,163 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Testimonials</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
+        :root{--bg:#071228;--card:rgba(255,255,255,0.03);--accent:#74b9ff;--muted:rgba(255,255,255,0.78)}
+        *{box-sizing:border-box}
+        html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,var(--bg),#041827);color:#fff}
 
-        .hero {
-            background: black;
-            height: 100vh;
-            height: auto;
-            min-height: 100vh;
-            width: 100%;
-            position: relative;
+        header{padding:36px 6vw 12px;display:flex;align-items:center;justify-content:space-between}
+        header h1{margin:0;font-size:28px;letter-spacing:1px}
+        header p{margin:0;color:var(--muted)}
 
-        }
+        main{max-width:1100px;margin:28px auto;padding:0 6vw}
 
-        .hero h1 {
-            text-align: center;
-            padding-top: 15px;
-            font-size: 70px;
-            
-            /* border-bottom: 4px solid white ; */
-            /* color: rgb(101, 218, 47); */
-            background: rgb(245, 7, 210);
-            background: linear-gradient(90deg, rgb(245, 71, 210), rgb(247, 80, 124));
-            -webkit-background-clip: Text;
-            -webkit-text-fill-color: transparent;
+        /* grid for larger screens */
+        .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+        .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:20px;border-radius:12px;display:flex;gap:16px;align-items:flex-start;transition:transform .32s,box-shadow .32s}
+        .card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,0.6)}
+        .avatar{width:88px;height:88px;border-radius:12px;overflow:hidden;flex-shrink:0}
+        .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+        .quote{flex:1}
+        .quote p{margin:0 0 10px;color:var(--muted);line-height:1.5}
+        .quote h4{margin:0;font-size:16px}
+        .tag{font-size:13px;color:rgba(255,255,255,0.6)}
 
+        /* mobile: horizontal scroll snap */
+        .snap{display:none;gap:12px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory}
+        .snap .card{min-width:280px;scroll-snap-align:center}
 
-            font-family: 'Playfair Display SC', serif;
-        }
-         
+        /* decorative */
+        .hero{margin:10px 0 24px}
+        .hero h2{margin:0;font-size:34px}
+        .hero p{color:var(--muted)}
 
-        .slide-row {
-            display: flex;
-            width: 3200px;
-            transition: 0.5s;
-        }
-
-        .slide-col {
-            width: 900px;
-            height: 400px;
-            position: relative;
-
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-evenly;
-        }
-
-        .image {
-            /* position: absolute;
-            top: 0;
-            right: 0; */
-            height: 100%;
-            width: 100%;
-            max-width: 350px;
-            border-radius: 10px;
-
-        }
-
-        .image img {
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-        }
-
-        .text {
-            position: relative;
-            left: 20px;
-            background: linear-gradient(135deg, rgb(255, 215, 122), rgb(204, 254, 77));
-            width: 550px;
-            height: 270px;
-            /* position: absolute;
-            left: 0;
-            top: 50%; */
-            /* transform: translate(-50%, -50%); */
-            border-radius: 10px;
-            color: black;
-            padding: 45px;
-            box-sizing: border-box;
-            z-index: 2;
-        }
-
-        .text p {
-            font-size: 25px;
-            line-height: 24px;
-            font-weight: bold;
-
-        }
-
-        .text h3 {
-            margin: 40px;
-            color: black;
-
-        }
-
-        .container {
-            width: 800px;
-            height: auto;
-            min-height: 400px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .indicator {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: -50px;
-
-        }
-
-        .btn {
-            display: inline-block;
-            height: 15px;
-            width: 15px;
-            margin: 4px;
-            border-radius: 15px;
-            background: #fff;
-            cursor: pointer;
-            transition: 0.5s;
-        }
-
-        .active {
-            width: 45px;
-        }
-
-        .testimonial {
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-        }
+        /* small screens */
+        @media (max-width:900px){.grid{display:none}.snap{display:flex}.card{min-width:78%;max-width:78%}}
+        @media (max-width:600px){header{padding:18px 5vw}main{padding:0 5vw}.card{min-width:86%}}
     </style>
 </head>
 
 <body>
-    <div class="hero">
-        <h1>Testimonials</h1>
-
-        <div class="container">
-            <div class="indicator">
-                <span class="btn active"></span>
-                <span class="btn"></span>
-                <span class="btn"></span>
-                <span class="btn"></span>
-
-            </div>
-            <div class="testimonial">
-                <div class="slide-row" id="slide">
-
-                    <div class="slide-col">
-                        <div class="text">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit asperiores
-                                consequatur voluptatem laborum?
-                            </p>
-                            <h3>~MICHAEL</h3>
-                            <!-- <p>Zara inc.</p> -->
-
-                        </div>
-                        <div class="image">
-                            <img src="test_1.jpeg" alt="">
-
-                        </div>
-                    </div>
-                    <div class="slide-col">
-                        <div class="text">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit asperiores
-                                consequatur voluptatem laborum?
-                            </p>
-                            <h3>~EMMA</h3>
-                            <!-- <p>Zara inc.</p> -->
-
-                        </div>
-                        <div class="image">
-                            <img src="test_3.jpg" alt="">
-
-                        </div>
-                    </div>
-                    <div class="slide-col">
-                        <div class="text">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit asperiores
-                                consequatur voluptatem laborum?
-                            </p>
-                            <h3>~JAMES </h3>
-                            <!-- <p>Zara inc.</p> -->
-
-                        </div>
-                        <div class="image">
-                            <img src="test_4.jpg" alt="">
-
-                        </div>
-                    </div>
-
-                    <div class="slide-col">
-                        <div class="text">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit asperiores
-                                consequatur voluptatem laborum?
-                            </p>
-                            <h3>~JESSICA WILLIAMSON</h3>
-                            <!-- <p>Zara inc.</p> -->
-
-                        </div>
-                        <div class="image">
-                            <img src="test_2.jpg" alt="">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
+    <header>
+        <div>
+            <h1>What our clients say</h1>
+            <p>Real results. Real people.</p>
         </div>
+        <div>
+            <p class="tag">Want to share your experience? <a href="PROJECT_CONTACT.html" style="color:var(--accent);text-decoration:none">Contact us</a></p>
+        </div>
+    </header>
 
+    <main>
+        <section class="hero">
+            <h2>Testimonials</h2>
+            <p>We work with people of all levels. Here are a few success stories from our members.</p>
+        </section>
 
+        <!-- Desktop grid -->
+        <section class="grid">
+            <article class="card reveal">
+                <div class="avatar"><img src="test_1.jpeg" alt="Michael"></div>
+                <div class="quote">
+                    <p>"Joining changed my life — the coaches are supportive and I finally reached my goal weight with a plan that fit my schedule."</p>
+                    <h4>Michael</h4>
+                    <div class="tag">Member since 2022</div>
+                </div>
+            </article>
 
-    </div>
+            <article class="card reveal">
+                <div class="avatar"><img src="test_3.jpg" alt="Emma"></div>
+                <div class="quote">
+                    <p>"The group classes are fun and motivating. Countless improvements in strength and energy."</p>
+                    <h4>Emma</h4>
+                    <div class="tag">Member since 2021</div>
+                </div>
+            </article>
+
+            <article class="card reveal">
+                <div class="avatar"><img src="test_4.jpg" alt="James"></div>
+                <div class="quote">
+                    <p>"Personal training helped me train for my first half-marathon. The plan was spot on."</p>
+                    <h4>James</h4>
+                    <div class="tag">Member since 2020</div>
+                </div>
+            </article>
+
+            <article class="card reveal">
+                <div class="avatar"><img src="test_2.jpg" alt="Jessica"></div>
+                <div class="quote">
+                    <p>"Friendly staff and a great community. I feel stronger and more confident every week."</p>
+                    <h4>Jessica Williamson</h4>
+                    <div class="tag">Member since 2019</div>
+                </div>
+            </article>
+
+            <article class="card reveal">
+                <div class="avatar"><img src="client.jpeg" alt="Client"></div>
+                <div class="quote">
+                    <p>"Flexible programs and excellent coaching — the nutrition guidance made a big difference."</p>
+                    <h4>Ash</h4>
+                    <div class="tag">Member since 2023</div>
+                </div>
+            </article>
+
+            <article class="card reveal">
+                <div class="avatar"><img src="w_box1.jpeg" alt="Client"></div>
+                <div class="quote">
+                    <p>"Well-structured sessions and measurable progress. Highly recommended."</p>
+                    <h4>Ravi</h4>
+                    <div class="tag">Member since 2021</div>
+                </div>
+            </article>
+        </section>
+
+        <!-- Mobile scroll-snap list -->
+        <section class="snap" aria-label="Testimonials carousel">
+            <article class="card">
+                <div class="avatar"><img src="test_1.jpeg" alt="Michael"></div>
+                <div class="quote">
+                    <p>"Joining changed my life — the coaches are supportive and I finally reached my goal weight with a plan that fit my schedule."</p>
+                    <h4>Michael</h4>
+                </div>
+            </article>
+            <article class="card">
+                <div class="avatar"><img src="test_3.jpg" alt="Emma"></div>
+                <div class="quote">
+                    <p>"The group classes are fun and motivating. Countless improvements in strength and energy."</p>
+                    <h4>Emma</h4>
+                </div>
+            </article>
+            <article class="card">
+                <div class="avatar"><img src="test_4.jpg" alt="James"></div>
+                <div class="quote">
+                    <p>"Personal training helped me train for my first half-marathon. The plan was spot on."</p>
+                    <h4>James</h4>
+                </div>
+            </article>
+            <article class="card">
+                <div class="avatar"><img src="test_2.jpg" alt="Jessica"></div>
+                <div class="quote">
+                    <p>"Friendly staff and a great community. I feel stronger and more confident every week."</p>
+                    <h4>Jessica Williamson</h4>
+                </div>
+            </article>
+        </section>
+    </main>
+
     <script>
-        var btn = document.getElementsByClassName("btn");
-        var slide = document.getElementById("slide");
-        btn[0].onclick = function () {
-            slide.style.transform = "translateX(0px)";
-            for (i = 0; i < 4; i++) {
-                btn[i].classList.remove("active");
-            }
-            this.classList.add("active");
-        }
-        btn[1].onclick = function () {
-            slide.style.transform = "translateX(-800px)";
-            for (i = 0; i < 4; i++) {
-                btn[i].classList.remove("active");
-            }
-            this.classList.add("active");
-
-        }
-        btn[2].onclick = function () {
-            slide.style.transform = "translateX(-1600px)";
-            for (i = 0; i < 4; i++) {
-                btn[i].classList.remove("active");
-            }
-            this.classList.add("active");
-        }
-        btn[3].onclick = function () {
-            slide.style.transform = "translateX(-2400px)";
-            for (i = 0; i < 4; i++) {
-                btn[i].classList.remove("active");
-            }
-            this.classList.add("active");
-
-        }
+        // reveal on scroll
+        (function(){
+            const els = document.querySelectorAll('.reveal');
+            const io = new IntersectionObserver((entries)=>{
+                entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+            },{threshold:0.12});
+            els.forEach(el=>io.observe(el));
+        })();
     </script>
 </body>
 
