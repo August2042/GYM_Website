@@ -33,3 +33,25 @@ Pull requests are welcome! For major changes, please open an issue first to disc
 ## License
 
 This project is open source. See the repository for license details.
+
+## Deploy to Netlify
+
+You can deploy this static site to Netlify in two easy ways.
+
+1) Deploy from your Git repository (recommended)
+
+- Push this repository to GitHub (or GitLab/Bitbucket).
+- In Netlify, choose "New site from Git" and connect your Git provider.
+- Select the `August2042/GYM_Website` repository and the `main` branch.
+- For build settings leave the build command empty and set the publish directory to `.` (the repository root).
+- Click "Deploy site".
+
+2) Direct deploy (quick drag-and-drop or Netlify CLI)
+
+- Quick: Zip the repository files (or the HTML files) and drag-and-drop the folder on the Netlify Sites dashboard under "Sites -> Add new site -> Deploy manually".
+- CLI: Install the Netlify CLI and run `netlify deploy --dir=.` from the project root. Use the `--prod` flag to publish a production deploy.
+
+Notes
+- This repo is a static site made of HTML and images; no build tools are required.
+- The included `netlify.toml` sets the publish directory to the project root. Adjust it if you later add a build step or move files into a subfolder.
+

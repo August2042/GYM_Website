@@ -1,0 +1,11 @@
+# Netlify configuration for GYM_Website
+
+# This site is a static site consisting of HTML, CSS and images.
+[build]
+  publish = "."
+  command = ""
+
+[dev]
+  command = ""
+
+# Redirects (none needed for a static site) can be added here in the future
