@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg1:#0f1724;--card:rgba(255,255,255,0.04);--accent:#22c55e;--glass:rgba(255,255,255,0.06);--muted:rgba(255,255,255,0.8)}
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;color:#fff;background:linear-gradient(135deg,#0b2238 0%,#09212f 40%,#083540 100%);-webkit-font-smoothing:antialiased}
+
+    .page{
+      min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px;
+    }
+
+    .card{
+      width:100%;max-width:1100px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));border-radius:14px;padding:28px;display:grid;grid-template-columns:1fr 420px;gap:26px;box-shadow:0 20px 50px rgba(2,6,23,0.45);border:1px solid rgba(255,255,255,0.04);
+    }
+
+    .left{padding:6px 4px}
+    h1{margin:6px 0 6px;font-size:28px}
+    p.lead{margin:0 0 18px;color:var(--muted);font-weight:300}
+
+    form{display:flex;flex-direction:column;gap:12px}
+    .row{display:flex;gap:12px}
+    .col{flex:1}
+
+    label{font-size:13px;margin-bottom:6px;display:inline-block;color:rgba(255,255,255,0.9)}
+    input[type="text"],input[type="email"],textarea{
+      width:100%;padding:12px 14px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.04);color:#fff;font-size:14px;outline:none;transition:box-shadow .18s,transform .12s
+    }
+    /* styled select with custom arrow and visible options */
+    .select-wrap{position:relative}
+    .select-wrap select{
+      -webkit-appearance:none;appearance:none;width:100%;padding:12px 40px 12px 14px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.04);color:#fff;font-size:14px;outline:none;transition:box-shadow .18s,transform .12s
+    }
+    .select-wrap::after{content:"\25BC";position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:rgba(255,255,255,0.7);font-size:12px}
+    /* try to style option backgrounds for better contrast */
+    .select-wrap select option{background:linear-gradient(180deg,#05282f,#06282e);color:#fff}
+  input:focus,textarea:focus,select:focus{box-shadow:0 8px 24px rgba(0,0,0,0.45);transform:translateY(-2px)}
+    textarea{min-height:120px;resize:vertical}
+
+    .helper{font-size:13px;color:rgba(255,255,255,0.7)}
+
+    .right{
+      padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);
+      display:flex;flex-direction:column;gap:12px;align-items:stretch;justify-content:center
+    }
+
+    .contact-item{display:flex;gap:10px;align-items:flex-start}
+    .icon{width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));display:inline-grid;place-items:center;font-weight:700;color:var(--accent)}
+    .ci-text{font-size:14px}
+    .ci-text small{display:block;color:var(--muted)}
+
+    .btn-row{display:flex;gap:12px;align-items:center;margin-top:6px}
+    .btn{background:var(--accent);border:none;color:#062018;padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 12px 28px rgba(34,197,94,0.14);transition:transform .14s}
+    .btn:hover{transform:translateY(-3px)}
+
+    .muted{color:rgba(255,255,255,0.7);font-size:13px}
+
+    /* small visual touches */
+    .glass-band{height:64px;border-radius:10px;padding:10px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:space-between;gap:12px}
+
+    /* success modal */
+    .modal{position:fixed;inset:0;display:grid;place-items:center;background:rgba(2,6,23,0.5);visibility:hidden;opacity:0;transition:opacity .18s,visibility 0s .18s}
+    .modal.show{visibility:visible;opacity:1;transition:opacity .18s}
+    .modal-card{background:linear-gradient(180deg,#06202a,#05282f);padding:26px;border-radius:12px;text-align:center;box-shadow:0 18px 40px rgba(2,6,23,0.76);border:1px solid rgba(255,255,255,0.04)}
+    .modal-card h3{margin:0 0 8px}
+    .modal-card p{margin:0 0 14px;color:var(--muted)}
+
+    /* validation */
+    .error{border-color:#ff6b6b !important;box-shadow:0 6px 18px rgba(255,107,107,0.12) !important}
+    .field-error{color:#ff9b9b;font-size:13px;margin-top:6px}
+
+    /* animations */
+    @keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    .card{animation:slideIn .55s ease both}
+
+    /* responsive */
+    @media (max-width:980px){.card{grid-template-columns:1fr}.right{order:2}.left{order:1}}
+    @media (max-width:520px){.page{padding:20px}.card{padding:18px}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card" role="document">
+      <section class="left" aria-labelledby="contact-title">
+        <h1 id="contact-title">Get in touch</h1>
+        <p class="lead">Have a question about membership, classes, or personal training? Send us a message — we reply within 24 hours.</p>
+
+        <form id="contactForm" novalidate>
+          <div class="row">
+            <div class="col">
+              <label for="name">Full name</label>
+              <input id="name" name="name" type="text" placeholder="Jane Doe" required>
+              <div class="field-error" id="err-name" aria-live="polite"></div>
+            </div>
+            <div class="col">
+              <label for="phone">Phone (optional)</label>
+              <input id="phone" name="phone" type="text" placeholder="+1 555 555 5555">
+            </div>
+          </div>
+
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required>
+            <div class="field-error" id="err-email" aria-live="polite"></div>
+          </div>
+
+          <div>
+            <label for="topic">Topic</label>
+            <select id="topic" name="topic">
+              <option>General question</option>
+              <option>Membership</option>
+              <option>Personal Training</option>
+              <option>Corporate</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="How can we help?" required></textarea>
+            <div class="field-error" id="err-message" aria-live="polite"></div>
+          </div>
+
+          <div class="row" style="align-items:center;justify-content:space-between;margin-top:6px">
+            <div class="muted">By contacting you accept our terms. We won’t spam.</div>
+            <div class="btn-row">
+              <button type="submit" class="btn">Send message</button>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <aside class="right" aria-labelledby="details-title">
+        <div class="glass-band">
+          <div>
+            <div style="font-weight:700">Visit us</div>
+            <div class="muted" style="font-size:13px">123 Fitness Ave, YourCity</div>
+          </div>
+          <div class="muted">Open: Mon–Sat 6:00–22:00</div>
+        </div>
+
+        <div class="contact-item">
+          <div class="icon">📞</div>
+          <div class="ci-text">Phone <small>+1 800 555 0199</small></div>
+        </div>
+
+        <div class="contact-item">
+          <div class="icon">✉️</div>
+          <div class="ci-text">Email <small>hello@gym.example</small></div>
+        </div>
+
+        <div class="contact-item">
+          <div class="icon">🕒</div>
+          <div class="ci-text">Support <small>Reply within 24 hours</small></div>
+        </div>
+
+        <div style="margin-top:8px" class="muted">Prefer direct email? <a href="mailto:hello@gym.example" style="color:var(--accent);text-decoration:none">hello@gym.example</a></div>
+      </aside>
+    </div>
+  </div>
+
+  <div class="modal" id="successModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <h3 id="modalTitle">Message sent</h3>
+      <p>Thanks! We received your message and will reply shortly.</p>
+      <button class="btn" id="closeModal">OK</button>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const form = document.getElementById('contactForm');
+      const modal = document.getElementById('successModal');
+      const closeModal = document.getElementById('closeModal');
+
+      function validate(){
+        let ok = true;
+        const name = document.getElementById('name');
+        const errName = document.getElementById('err-name');
+        if(!name.value.trim()){ ok = false; name.classList.add('error'); errName.textContent = 'Please enter your name'; }
+        else { name.classList.remove('error'); errName.textContent = '' }
+
+        // email
+        const email = document.getElementById('email');
+        const errEmail = document.getElementById('err-email');
+        const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if(!email.value.trim() || !emailRx.test(email.value)){ ok = false; email.classList.add('error'); errEmail.textContent = 'Please provide a valid email'; }
+        else { email.classList.remove('error'); errEmail.textContent = '' }
+
+        // message
+        const msg = document.getElementById('message');
+        const errMsg = document.getElementById('err-message');
+        if(!msg.value.trim() || msg.value.trim().length < 8){ ok = false; msg.classList.add('error'); errMsg.textContent = 'Please write a short message (8+ chars)'; }
+        else { msg.classList.remove('error'); errMsg.textContent = '' }
+
+        return ok;
+      }
+
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        if(!validate()) return;
+
+        // here you could send the data to your server. For demo, we just show success modal
+        modal.classList.add('show');
+        // reset form after a small delay
+        setTimeout(()=> form.reset(), 400);
+      });
+
+      closeModal.addEventListener('click', function(){ modal.classList.remove('show'); });
+
+      // close modal when clicking outside
+      modal.addEventListener('click', function(e){ if(e.target === modal) modal.classList.remove('show'); });
+    })();
+  </script>
+</body>
+</html>
