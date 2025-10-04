@@ -6,75 +6,178 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ABOUT US</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            background: rgb(34, 193, 195);
-            background: linear-gradient(354deg, rgba(34, 193, 195, 1) 18%, rgba(190, 45, 253, 1) 92%);
+        :root{
+            --bg-1: #22c1c3;
+            --bg-2: #be2dfd;
+            --card: rgba(255,255,255,0.12);
+            --glass: rgba(255,255,255,0.08);
+            --accent: #ff4957;
+            --text: #ffffff;
+            --muted: rgba(255,255,255,0.85);
         }
 
-        #About {
-            height: 600px;
-            width: 100%;
-            z-index: 1;
+        *{box-sizing: border-box;}
+        html,body{height:100%;margin:0;font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;}
+        body{
+            background: linear-gradient(120deg,var(--bg-1),var(--bg-2));
+            min-height:100vh;
+            color:var(--text);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            display:flex;align-items:center;justify-content:center;
+            padding:40px;
+            overflow-y:auto;
+            background-size: 400% 400%;
+            animation: gradientMove 12s ease infinite;
         }
 
-        #About h1 {
-            margin-top: 23px;
-            margin-left: 650px;
-            margin-right: 690px;
-            font-size: 29px;
-            padding: 10px;
-            border-bottom: 8px solid red;
-            border-radius: 5px;
-
+        @keyframes gradientMove{
+            0%{background-position:0% 50%}
+            50%{background-position:100% 50%}
+            100%{background-position:0% 50%}
         }
 
-        #About img {
-            width: 530px;
-            height: 400px;
-            float: left;
-            margin-left: 120px;
-            margin-right: 50px;
-            margin-top: 0px;
-
+        .about-wrap{
+            width:100%;max-width:1100px;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+            border-radius:18px;padding:28px;backdrop-filter: blur(6px);box-shadow:0 10px 40px rgba(2,6,23,0.45);
+            border:1px solid rgba(255,255,255,0.08);
+            display:flex;gap:30px;align-items:center;overflow:hidden;
         }
 
-        #About p {
-            font-size: 23px;
-            margin-right: 110px;
-            margin-top: 70px;
-
+        .hero{
+            flex:1.05;display:flex;flex-direction:column;gap:12px;padding:10px 8px;min-width:260px;
         }
 
-        .container img {
-            border: 2px solid black;
-            box-shadow: 8px 10px 10px grey;
+        .hero h1{font-size:32px;margin:8px 0 2px;font-weight:700;letter-spacing:0.6px;color:var(--text)}
+        .hero .subtitle{color:var(--muted);font-weight:300;margin-bottom:8px}
+
+        .content{
+            flex:1;display:flex;gap:22px;align-items:center;flex-wrap:wrap;
+        }
+
+        .image-card{
+            width:520px;max-width:48%;min-width:220px;position:relative;display:flex;flex-direction:column;align-items:center;
+            transform:translateZ(0);
+        }
+
+        .image-card .photo{
+            width:100%;height:320px;border-radius:14px;overflow:hidden;position:relative;border:2px solid rgba(255,255,255,0.12);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.35);transition:transform 400ms cubic-bezier(.2,.9,.3,1),box-shadow 300ms;
+            background:linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.06));
+        }
+
+        .photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 600ms ease}
+
+        .image-card:hover .photo{transform:translateY(-8px) scale(1.02);box-shadow:0 22px 50px rgba(0,0,0,0.5)}
+        .image-card:hover .photo img{transform:scale(1.04) rotate(-0.5deg)}
+
+        /* Reflection using pseudo-element for wide support */
+        .photo::after{
+            content:"";position:absolute;left:0;right:0;bottom:-64px;height:64px;background:linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0));
+            transform:translateY(6px) scaleY(-1);pointer-events:none;filter:blur(6px);opacity:0.55;
+            background-image: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0));
+        }
+
+        .text-block{flex:1;min-width:260px}
+        .text-block p{font-size:16px;line-height:1.6;color:var(--muted);margin:0 0 18px}
+
+        .cta{display:flex;gap:12px;align-items:center}
+        .btn{
+            background:var(--accent);color:#fff;padding:12px 18px;border-radius:999px;border:none;cursor:pointer;font-weight:600;box-shadow:0 8px 18px rgba(255,73,87,0.18);
+            transition:transform 200ms ease,box-shadow 200ms ease,opacity 200ms;
+        }
+        .btn:hover{transform:translateY(-4px);box-shadow:0 18px 32px rgba(255,73,87,0.22)}
+
+        .small{font-size:13px;color:rgba(255,255,255,0.75);}
+
+        /* subtle float animation on the image */
+        @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+        .photo{animation:floaty 6s ease-in-out infinite;}
+
+        /* reveal animations */
+        .reveal{opacity:0;transform:translateY(18px);transition:all 700ms cubic-bezier(.2,.9,.3,1)}
+        .reveal.visible{opacity:1;transform:none}
+
+        /* responsive */
+        @media (max-width:900px){
+            .about-wrap{flex-direction:column;padding:22px}
+            .content{width:100%;}
+            .image-card{max-width:100%}
+            .photo{height:260px}
+        }
+        @media (max-width:480px){
+            body{padding:20px}
+            .hero h1{font-size:24px}
+            .photo{height:200px}
         }
     </style>
 </head>
 
 <body>
-    <div id="About">
-        <h1>
-            ABOUT US
-        </h1>
-        <div class="container">
-            <img src="about.avif" alt="">
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam similique libero eos eum dolor sunt.
-                Voluptatum, quisquam minima dolorem sit eligendi consequuntur labore, ratione praesentium ipsam itaque
-                quae magni expedita! <br> <br>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam deleniti sequi atque aspernatur, saepe
-                vitae, cumque cupiditate mollitia libero perferendis laborum fugit. Consequatur, vero. Veritatis
-                voluptate aut, inventore quos officiis exercitationem, voluptatibus temporibus quibusdam, quidem sunt
-                corrupti cum fuga necessitatibus?
-                <br> <br>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Totam aspernatur voluptatum minus accusantium
-                aliquid necessitatibus tempora officia quas omnis veritatis?
-            </p>
-        </div>
-    </div>
+    <main class="about-wrap" aria-labelledby="about-heading">
+        <div class="hero">
+            <h1 id="about-heading">About Us</h1>
+            <div class="subtitle">We help people transform — stronger bodies, clearer minds.</div>
 
+            <div class="content">
+                <div class="image-card reveal" data-reveal>
+                    <figure class="photo">
+                        <img src="about.avif" alt="Gym team working out">
+                    </figure>
+                </div>
+
+                <div class="text-block reveal" data-reveal>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, ratione! We combine modern
+                        training techniques, nutrition coaching, and real human support to help you reach your goals.
+                        Our trainers are certified and passionate about sustainable results.
+                    </p>
+                    <p>
+                        Whether you’re starting out or training for performance, our programs are built around you.
+                        Expect clear plans, small-group energy, and individual attention.
+                    </p>
+
+                    <div class="cta">
+                        <button class="btn" id="learnBtn">Learn More</button>
+                        <div class="small">Open hours: Mon–Sat • 6:00–22:00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Scroll reveal using IntersectionObserver
+        (function(){
+            const items = document.querySelectorAll('[data-reveal]');
+            if('IntersectionObserver' in window){
+                const io = new IntersectionObserver((entries)=>{
+                    entries.forEach(e=>{
+                        if(e.isIntersecting){
+                            e.target.classList.add('visible');
+                            // once visible, unobserve to save work
+                            io.unobserve(e.target);
+                        }
+                    })
+                },{threshold:0.12});
+                items.forEach(i=>io.observe(i));
+            } else {
+                // fallback
+                items.forEach(i=>i.classList.add('visible'));
+            }
+        })();
+
+        // Optional: button click - smooth scroll to contact or more info
+        document.getElementById('learnBtn').addEventListener('click',function(){
+            // simple animation feedback
+            const btn = this;
+            btn.style.transform = 'scale(0.98)';
+            setTimeout(()=>btn.style.transform='',160);
+            alert('Thanks for your interest! Open the membership or contact page to learn more.');
+        });
+    </script>
 </body>
 
 </html>
