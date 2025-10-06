@@ -46,6 +46,11 @@
             display:flex;gap:30px;align-items:center;overflow:hidden;
         }
 
+        .back-btn{
+            display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;background:rgba(255,255,255,0.06);color:var(--text);text-decoration:none;border:1px solid rgba(255,255,255,0.06);font-weight:600;box-shadow:0 6px 16px rgba(2,6,23,0.25);
+        }
+        .back-btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(2,6,23,0.35)}
+
         .hero{
             flex:1.05;display:flex;flex-direction:column;gap:12px;padding:10px 8px;min-width:260px;
         }
@@ -118,7 +123,10 @@
 <body>
     <main class="about-wrap" aria-labelledby="about-heading">
         <div class="hero">
-            <h1 id="about-heading">About Us</h1>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+                <a class="back-btn" href="phtotoshop.html" aria-label="Back to Home">⬅ Back</a>
+                <h1 id="about-heading">About Us</h1>
+            </div>
             <div class="subtitle">We help people transform — stronger bodies, clearer minds.</div>
 
             <div class="content">
