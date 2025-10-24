@@ -500,6 +500,11 @@
             box-shadow: 2px 3px 5px grey;
             padding: 10px;
             text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .services-box:hover {
+            transform: translateY(-10px);
         }
 
         .services-box h2 {
@@ -730,6 +735,19 @@
             justify-content: space-around;
             align-items: center;
         }
+
+        /* Animation */
+        .reveal {
+            position: relative;
+            transform: translateY(150px);
+            opacity: 0;
+            transition: 1s all ease;
+        }
+
+        .reveal.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -792,7 +810,7 @@
 
 
 
-    <section id="about">
+    <section id="about" class="reveal">
         <div class="about-row">
             <div class="about-left-col">
                 <h1>About <span id="blue">Me</span></h1>
@@ -829,7 +847,7 @@
     </section>
 
 
-    <section id="Sign-up">
+    <section id="Sign-up" class="reveal">
         <div class="signup-row">
             <div class="signup-left-col">
                 <img src="yt_1.jpeg" alt="">
@@ -843,55 +861,42 @@
     </section>
 
 
-    <section id="services">
+    <section id="services" class="reveal">
         <div class="services-info">
             <h1>Our <span id="blue">Services</span></h1>
             <p>What we Provide</p>
         </div>
         <div class="services-roe">
             <div class="services-box">
-                <i class="fa fa-suitcase" aria-hidden="true"></i>
-                <h2>
-                    Cardio
-                </h2>
-                <p>From Rajasthan,doing gym is good for healthy life.</p>
+                <i class="fa fa-heartbeat" aria-hidden="true"></i>
+                <h2>Cardio Training</h2>
+                <p>Improve your heart health and endurance with our state-of-the-art cardio equipment.</p>
             </div>
             <div class="services-box">
-                <i class="fa fa-suitcase" aria-hidden="true"></i>
-                <h2>
-                    Cardio
-                </h2>
-                <p>From Rajasthan,doing gym is good for healthy life.</p>
+                <i class="fa fa-dumbbell" aria-hidden="true"></i>
+                <h2>Strength Training</h2>
+                <p>Build muscle and strength with our wide range of free weights and resistance machines.</p>
             </div>
             <div class="services-box">
-                <i class="fa fa-suitcase" aria-hidden="true"></i>
-                <h2>
-                    Cardio
-                </h2>
-                <p>From Rajasthan,doing gym is good for healthy life.</p>
+                <i class="fa fa-users" aria-hidden="true"></i>
+                <h2>Group Classes</h2>
+                <p>Join our energetic group classes, including yoga, Zumba, and high-intensity interval training (HIIT).</p>
             </div>
             <div class="services-box">
-                <i class="fa fa-suitcase" aria-hidden="true"></i>
-                <h2>
-                    Cardio
-                </h2>
-                <p>From Rajasthan,doing gym is good for healthy life.</p>
+                <i class="fa fa-user-shield" aria-hidden="true"></i>
+                <h2>Personal Training</h2>
+                <p>Get one-on-one guidance and a customized workout plan from our certified personal trainers.</p>
             </div>
             <div class="services-box">
-                <i class="fa fa-suitcase" aria-hidden="true"></i>
-                <h2>
-                    Cardio
-                </h2>
-                <p>From Rajasthan,doing gym is good for healthy life.</p>
+                <i class="fa fa-utensils" aria-hidden="true"></i>
+                <h2>Nutrition Counseling</h2>
+                <p>Achieve your fitness goals faster with our expert nutrition advice and meal plans.</p>
             </div>
             <div class="services-box">
-                <i class="fa fa-suitcase" aria-hidden="true"></i>
-                <h2>
-                    Cardio
-                </h2>
-                <p>From Rajasthan,doing gym is good for healthy life.</p>
+                <i class="fa fa-spa" aria-hidden="true"></i>
+                <h2>Yoga and Meditation</h2>
+                <p>Improve your flexibility, balance, and mental well-being in our calming yoga and meditation sessions.</p>
             </div>
-
         </div>
         <div style="text-align:center;margin-top:18px;">
             <a href="PROJECT_SERVICES.html" class="about-btn" style="text-decoration:none;display:inline-block">View all services</a>
@@ -899,23 +904,22 @@
     </section>
 
 
-    <section id="members">
+    <section id="members" class="reveal">
         <div class="services-info">
             <h1>Our <span id="blue">Members</span></h1>
             <p>What our gym members says</p>
         </div>
         <div class="members-cards">
             <img src="client.jpeg" alt="">
-            <p>From Rajasthan,doing gym is good for healthy life. It helps our body to fit .It release stress from
-                our mind</p>
-            <h2>* Jacky D'Souza, Gym Client</h2>
+            <p>"Joining this gym was the best decision I've ever made. The trainers are incredibly supportive, the community is motivating, and I've never felt stronger or healthier in my life. I've not only transformed my body but also my mindset. Highly recommended!"</p>
+            <h2>* Priya Sharma, Valued Member</h2>
             <img src="s_media.png" alt="">
         </div>
 
     </section>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 
 
-    <section id="works">
+    <section id="works" class="reveal">
         <div class="services-info">
             <h1>Our <span id="blue">Works</span></h1>
             <p>What we provide</p>
@@ -944,7 +948,7 @@
 
 
 
-    <section id="contact">
+    <section id="contact" class="reveal">
         <div class="services-info">
             <h1>Get in <span id="blue">Touch</span></h1>
             <p>We are Avaialable</p>
@@ -1000,6 +1004,24 @@
             document.querySelector("div.navMenuWrapper").classList.toggle("open");
             document.body.classList.toggle("hidden");
         });
+
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                } else {
+                    reveals[i].classList.remove("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
     </script>
 
 
