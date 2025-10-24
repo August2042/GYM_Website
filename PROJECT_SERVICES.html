@@ -38,9 +38,56 @@
     .blocks{max-width:1100px;width:100%;display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
     .block{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:26px;border-radius:14px}
 
-    /* small animations */
+    /* enhanced animations */
     .reveal{opacity:0;transform:translateY(18px);transition:all .7s ease}
     .reveal.visible{opacity:1;transform:none}
+
+    /* floating animation */
+    @keyframes float{0%,100%{transform:translateY(0px)}50%{transform:translateY(-10px)}}
+    .float-animation{animation:float 3s ease-in-out infinite}
+
+    /* pulse animation */
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,193,195,0.4)}100%{box-shadow:0 0 0 20px rgba(34,193,195,0)}}
+    .pulse-animation{animation:pulse 2s infinite}
+
+    /* gradient shift animation */
+    @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    .gradient-animate{background:linear-gradient(-45deg,var(--accent),var(--accent2),var(--accent));background-size:400% 400%;animation:gradientShift 4s ease infinite}
+
+    /* card hover enhancements */
+    .card:hover .icon{transform:scale(1.1) rotate(5deg);transition:transform 0.3s ease}
+    .card:hover{box-shadow:0 25px 60px rgba(34,193,195,0.15),0 0 30px rgba(190,45,253,0.1)}
+
+    /* background particles effect */
+    .particles{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;pointer-events:none}
+    .particle{position:absolute;background:var(--accent);border-radius:50%;opacity:0.1;animation:float 6s ease-in-out infinite}
+    .particle:nth-child(odd){animation-delay:-2s}
+    .particle:nth-child(even){animation-delay:-4s}
+
+    /* testimonial card styling */
+    .testimonial-card{background:linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02));border-radius:16px;padding:24px;border:1px solid rgba(255,255,255,0.1);position:relative;overflow:hidden}
+    .testimonial-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+    .testimonial-stars{color:#ffd700;font-size:16px;margin-bottom:12px}
+    .testimonial-name{font-weight:600;margin-top:12px}
+
+    /* trainer card styling */
+    .trainer-card{background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));border-radius:16px;padding:24px;text-align:center;border:1px solid rgba(255,255,255,0.08);transition:all 0.3s ease}
+    .trainer-card:hover{transform:translateY(-8px);border-color:var(--accent)}
+    .trainer-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:24px;color:#012}
+    .trainer-specialty{color:var(--muted);font-size:14px;margin-top:8px}
+
+    /* pricing card styling */
+    .pricing-card{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));border-radius:16px;padding:28px;text-align:center;border:2px solid transparent;transition:all 0.3s ease;position:relative}
+    .pricing-card:hover{border-color:var(--accent);transform:translateY(-5px)}
+    .pricing-card.popular{border-color:var(--accent2);background:linear-gradient(180deg,rgba(190,45,253,0.1),rgba(190,45,253,0.05))}
+    .pricing-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent2);color:#012;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:700}
+    .pricing-price{font-size:32px;font-weight:700;margin:16px 0;color:var(--accent)}
+    .pricing-features{list-style:none;padding:0;margin:20px 0}
+    .pricing-features li{margin:8px 0;color:var(--muted);font-size:14px}
+
+    /* section backgrounds */
+    .section-bg{position:relative;overflow:hidden}
+    .section-bg::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 20% 80%,rgba(34,193,195,0.1) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(190,45,253,0.1) 0%,transparent 50%)}
 
     /* responsive */
     @media (max-width:1000px){.services-grid{grid-template-columns:repeat(2,1fr)}.hero{flex-direction:column}.hero-right{grid-template-columns:repeat(1,1fr)}.blocks{grid-template-columns:1fr}}
@@ -57,6 +104,9 @@
       <a href="PROJECT_CONTACT.html">Contact</a>
     </div>
   </div>
+
+  <!-- Background particles -->
+  <div class="particles" id="particles"></div>
 
   <main id="main-scroll">
     <section id="hero">
@@ -129,6 +179,154 @@
       </div>
     </section>
 
+    <section id="features" class="section-bg">
+      <div style="max-width:1200px;margin:0 auto;padding:0 6vw">
+        <div style="text-align:center;margin-bottom:60px">
+          <h2 class="reveal" data-reveal>Why Choose AKFIT?</h2>
+          <p class="lead reveal" data-reveal style="color:var(--muted);max-width:60ch;margin:0 auto">Experience the difference with our proven methods and expert guidance</p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px">
+          <div class="card reveal" data-reveal style="text-align:center;padding:32px">
+            <div class="icon float-animation" style="margin:0 auto 20px">🏆</div>
+            <h3>Expert Trainers</h3>
+            <p>Certified professionals with years of experience in fitness and nutrition coaching.</p>
+          </div>
+          <div class="card reveal" data-reveal style="text-align:center;padding:32px">
+            <div class="icon float-animation" style="margin:0 auto 20px;animation-delay:1s">📊</div>
+            <h3>Progress Tracking</h3>
+            <p>Advanced monitoring tools to track your journey and celebrate every milestone.</p>
+          </div>
+          <div class="card reveal" data-reveal style="text-align:center;padding:32px">
+            <div class="icon float-animation" style="margin:0 auto 20px;animation-delay:2s">🎯</div>
+            <h3>Customized Plans</h3>
+            <p>Personalized programs tailored to your goals, fitness level, and lifestyle.</p>
+          </div>
+          <div class="card reveal" data-reveal style="text-align:center;padding:32px">
+            <div class="icon float-animation" style="margin:0 auto 20px;animation-delay:0.5s">🤝</div>
+            <h3>Ongoing Support</h3>
+            <p>24/7 access to your trainer and community support throughout your fitness journey.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="trainers">
+      <div style="max-width:1200px;margin:0 auto;padding:0 6vw">
+        <div style="text-align:center;margin-bottom:60px">
+          <h2 class="reveal" data-reveal>Meet Our Expert Trainers</h2>
+          <p class="lead reveal" data-reveal style="color:var(--muted);max-width:60ch;margin:0 auto">Work with certified professionals dedicated to your success</p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px">
+          <div class="trainer-card reveal" data-reveal>
+            <div class="trainer-avatar">AS</div>
+            <h3>Alex Smith</h3>
+            <p class="trainer-specialty">Strength & Conditioning</p>
+            <p>10+ years experience in powerlifting and athletic performance. Specializes in strength training and injury prevention.</p>
+          </div>
+          <div class="trainer-card reveal" data-reveal>
+            <div class="trainer-avatar">MJ</div>
+            <h3>Maya Johnson</h3>
+            <p class="trainer-specialty">Nutrition & Wellness</p>
+            <p>Certified nutritionist and wellness coach. Expert in sustainable weight management and healthy lifestyle habits.</p>
+          </div>
+          <div class="trainer-card reveal" data-reveal>
+            <div class="trainer-avatar">CR</div>
+            <h3>Carlos Rodriguez</h3>
+            <p class="trainer-specialty">Cardio & HIIT</p>
+            <p>Former athlete turned trainer. Specializes in high-intensity workouts and cardiovascular conditioning.</p>
+          </div>
+          <div class="trainer-card reveal" data-reveal>
+            <div class="trainer-avatar">SL</div>
+            <h3>Sarah Lee</h3>
+            <p class="trainer-specialty">Mobility & Recovery</p>
+            <p>Yoga instructor and mobility specialist. Focuses on flexibility, recovery, and mind-body connection.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="section-bg">
+      <div style="max-width:1200px;margin:0 auto;padding:0 6vw">
+        <div style="text-align:center;margin-bottom:60px">
+          <h2 class="reveal" data-reveal>What Our Members Say</h2>
+          <p class="lead reveal" data-reveal style="color:var(--muted);max-width:60ch;margin:0 auto">Real stories from real people who transformed their lives</p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:30px">
+          <div class="testimonial-card reveal" data-reveal>
+            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+            <p>"AKFIT completely changed my relationship with fitness. The trainers are incredibly knowledgeable and the community support is amazing!"</p>
+            <div class="testimonial-name">- Jennifer M.</div>
+          </div>
+          <div class="testimonial-card reveal" data-reveal>
+            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+            <p>"Lost 30 pounds and gained so much confidence. The personalized approach really works and the results speak for themselves."</p>
+            <div class="testimonial-name">- Michael R.</div>
+          </div>
+          <div class="testimonial-card reveal" data-reveal>
+            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+            <p>"The corporate wellness program boosted our team's productivity and morale. Highly recommend for any organization!"</p>
+            <div class="testimonial-name">- David K., CEO</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div style="max-width:1200px;margin:0 auto;padding:0 6vw">
+        <div style="text-align:center;margin-bottom:60px">
+          <h2 class="reveal" data-reveal>Membership Plans</h2>
+          <p class="lead reveal" data-reveal style="color:var(--muted);max-width:60ch;margin:0 auto">Choose the perfect plan for your fitness journey</p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px">
+          <div class="pricing-card reveal" data-reveal>
+            <h3>Drop-In</h3>
+            <div class="pricing-price">$25</div>
+            <div style="color:var(--muted);margin-bottom:20px">per session</div>
+            <ul class="pricing-features">
+              <li>Access to group classes</li>
+              <li>Equipment usage</li>
+              <li>Basic facility access</li>
+              <li>No commitment</li>
+            </ul>
+            <a href="PROJECT_CONTACT.html" class="gradient-animate" style="display:inline-block;padding:12px 24px;border-radius:8px;color:#012;text-decoration:none;font-weight:600">Get Started</a>
+          </div>
+
+          <div class="pricing-card popular reveal" data-reveal>
+            <div class="pricing-badge">Most Popular</div>
+            <h3>Monthly Unlimited</h3>
+            <div class="pricing-price">$99</div>
+            <div style="color:var(--muted);margin-bottom:20px">per month</div>
+            <ul class="pricing-features">
+              <li>Unlimited group classes</li>
+              <li>2 personal training sessions</li>
+              <li>Nutrition consultation</li>
+              <li>Progress tracking</li>
+              <li>24/7 gym access</li>
+            </ul>
+            <a href="PROJECT_CONTACT.html" class="gradient-animate" style="display:inline-block;padding:12px 24px;border-radius:8px;color:#012;text-decoration:none;font-weight:600">Get Started</a>
+          </div>
+
+          <div class="pricing-card reveal" data-reveal>
+            <h3>Premium Coaching</h3>
+            <div class="pricing-price">$199</div>
+            <div style="color:var(--muted);margin-bottom:20px">per month</div>
+            <ul class="pricing-features">
+              <li>8 personal training sessions</li>
+              <li>Weekly nutrition coaching</li>
+              <li>Custom meal plans</li>
+              <li>Priority scheduling</li>
+              <li>Supplement guidance</li>
+            </ul>
+            <a href="PROJECT_CONTACT.html" class="gradient-animate" style="display:inline-block;padding:12px 24px;border-radius:8px;color:#012;text-decoration:none;font-weight:600">Get Started</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="blocks">
       <div class="blocks" style="max-width:1100px">
         <div class="block reveal" data-reveal>
@@ -136,8 +334,8 @@
           <p class="muted">We assess your goals, build a progressive plan and support you weekly. Our trainers log sessions and adjust plans as you improve.</p>
         </div>
         <div class="block reveal" data-reveal>
-          <h2>Memberships & Pricing</h2>
-          <p class="muted">Flexible plans for drop-in classes, monthly memberships and private coaching. Contact us for custom packages.</p>
+          <h2>Getting Started</h2>
+          <p class="muted">Book a free consultation, get your personalized plan, and start your transformation journey with expert guidance every step of the way.</p>
         </div>
       </div>
     </section>
@@ -160,6 +358,56 @@
       },{threshold:0.12});
       items.forEach(i=>io.observe(i));
     })();
+
+    // background particles effect
+    (function(){
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 50;
+
+      for(let i = 0; i < particleCount; i++){
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+
+        // random size between 2-6px
+        const size = Math.random() * 4 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+
+        // random position
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+
+        // random animation duration
+        particle.style.animationDuration = (Math.random() * 10 + 6) + 's';
+
+        // random colors between accent colors
+        const colors = ['var(--accent)', 'var(--accent2)', 'rgba(255,255,255,0.1)'];
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+        particlesContainer.appendChild(particle);
+      }
+    })();
+
+    // smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // add some interactive hover effects
+    document.querySelectorAll('.card, .trainer-card, .testimonial-card, .pricing-card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = this.style.transform || 'translateY(0px)';
+      });
+    });
   </script>
 </body>
 </html>
