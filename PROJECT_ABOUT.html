@@ -9,28 +9,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root{
-            --bg-1: #22c1c3;
-            --bg-2: #be2dfd;
-            --card: rgba(255,255,255,0.12);
+            --bg1: #081226;
+            --bg2: #04202a;
+            --accent: #22c1c3;
+            --accent2: #be2dfd;
+            --card: rgba(255,255,255,0.03);
             --glass: rgba(255,255,255,0.08);
-            --accent: #ff4957;
+            --accent-red: #ff4957;
             --text: #ffffff;
-            --muted: rgba(255,255,255,0.85);
+            --muted: rgba(255,255,255,0.8);
         }
 
         *{box-sizing: border-box;}
         html,body{height:100%;margin:0;font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;}
         body{
-            background: linear-gradient(120deg,var(--bg-1),var(--bg-2));
+            background: linear-gradient(180deg,var(--bg1),var(--bg2));
             min-height:100vh;
             color:var(--text);
             -webkit-font-smoothing:antialiased;
             -moz-osx-font-smoothing:grayscale;
-            display:flex;align-items:center;justify-content:center;
-            padding:40px;
             overflow-y:auto;
-            background-size: 400% 400%;
-            animation: gradientMove 12s ease infinite;
+            padding:0;
+            margin:0;
         }
 
         @keyframes gradientMove{
@@ -105,55 +105,268 @@
         .reveal{opacity:0;transform:translateY(18px);transition:all 700ms cubic-bezier(.2,.9,.3,1)}
         .reveal.visible{opacity:1;transform:none}
 
+        /* enhanced animations */
+        @keyframes float{0%,100%{transform:translateY(0px)}50%{transform:translateY(-10px)}}
+        .float-animation{animation:float 3s ease-in-out infinite}
+
+        @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+        .gradient-animate{background:linear-gradient(-45deg,var(--accent),var(--accent2),var(--accent));background-size:400% 400%;animation:gradientShift 4s ease infinite}
+
+        /* card hover enhancements */
+        .card:hover{transform:translateY(-8px);box-shadow:0 25px 60px rgba(34,193,195,0.15),0 0 30px rgba(190,45,253,0.1)}
+
+        /* background particles */
+        .particles{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;pointer-events:none}
+        .particle{position:absolute;background:var(--accent);border-radius:50%;opacity:0.1;animation:float 6s ease-in-out infinite}
+
+        /* achievement cards */
+        .achievement-card{background:linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02));border-radius:16px;padding:24px;text-align:center;border:1px solid rgba(255,255,255,0.1);transition:all 0.3s ease}
+        .achievement-card:hover{transform:translateY(-5px);border-color:var(--accent)}
+        .achievement-icon{font-size:32px;margin-bottom:12px}
+        .achievement-number{font-size:28px;font-weight:700;color:var(--accent);margin:8px 0}
+
+        /* certification cards */
+        .cert-card{background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));border-radius:12px;padding:20px;border:1px solid rgba(255,255,255,0.08);transition:all 0.3s ease}
+        .cert-card:hover{transform:translateY(-3px);border-color:var(--accent2)}
+        .cert-title{font-weight:600;margin-bottom:8px}
+        .cert-issuer{color:var(--muted);font-size:14px}
+
+        /* stats section */
+        .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px}
+        .stat-item{text-align:center}
+        .stat-number{font-size:36px;font-weight:700;color:var(--accent);margin-bottom:8px}
+        .stat-label{color:var(--muted);font-size:14px}
+
+        /* team cards */
+        .team-card{background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));border-radius:16px;padding:24px;text-align:center;border:1px solid rgba(255,255,255,0.08);transition:all 0.3s ease}
+        .team-card:hover{transform:translateY(-8px);border-color:var(--accent)}
+        .team-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:24px;color:#012}
+        .team-specialty{color:var(--muted);font-size:14px;margin-top:8px}
+
+        /* section backgrounds */
+        .section-bg{position:relative;overflow:hidden}
+        .section-bg::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 20% 80%,rgba(34,193,195,0.1) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(190,45,253,0.1) 0%,transparent 50%)}
+
+        /* navigation */
+        .topbar{position:fixed;inset:0 0 auto 0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:18px 28px;background:linear-gradient(180deg,rgba(8,18,38,0.95),rgba(8,18,38,0.85));backdrop-filter:blur(10px);border-bottom:1px solid rgba(34,193,195,0.2)}
+        .brand{font-weight:700;letter-spacing:1px;color:var(--accent);font-size:24px}
+        .topbar a{margin-left:16px;text-decoration:none;padding:10px 16px;border-radius:8px;border:1px solid rgba(34,193,195,0.3);color:#fff;font-weight:500;transition:all 0.3s ease}
+        .topbar a:hover{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#012;border-color:var(--accent2);transform:translateY(-2px)}
+
+        /* main content */
+        main{height:100vh;overflow-y:auto;scroll-snap-type:y mandatory}
+        section{min-height:100vh;padding:120px 6vw 60px;display:flex;align-items:center;justify-content:center;scroll-snap-align:start}
+
         /* responsive */
-        @media (max-width:900px){
+        @media (max-width:1000px){
             .about-wrap{flex-direction:column;padding:22px}
-            .content{width:100%;}
+            .content{width:100%;max-width:100%}
             .image-card{max-width:100%}
             .photo{height:260px}
         }
-        @media (max-width:480px){
+        @media (max-width:600px){
             body{padding:20px}
             .hero h1{font-size:24px}
             .photo{height:200px}
+            section{padding:80px 4vw 40px}
         }
     </style>
 </head>
 
 <body>
-    <main class="about-wrap" aria-labelledby="about-heading">
-        <div class="hero">
-            <div style="display:flex;align-items:center;justify-content:space-between">
-                <a class="back-btn" href="phtotoshop.html" aria-label="Back to Home">⬅ Back</a>
-                <h1 id="about-heading">About Us</h1>
-            </div>
-            <div class="subtitle">We help people transform — stronger bodies, clearer minds.</div>
+    <!-- Navigation -->
+    <div class="topbar">
+        <div class="brand"><a href="phtotoshop.html">AKFIT</a></div>
+        <div class="navlinks">
+            <a href="phtotoshop.html">Home</a>
+            <a href="#about">About</a>
+            <a href="PROJECT_SERVICES.html">Services</a>
+            <a href="PROJECT_CONTACT.html">Contact</a>
+        </div>
+    </div>
 
-            <div class="content">
-                <div class="image-card reveal" data-reveal>
-                    <figure class="photo">
-                        <img src="about.avif" alt="Gym team working out">
-                    </figure>
+    <!-- Background particles -->
+    <div class="particles" id="particles"></div>
+
+    <main id="main-scroll">
+        <!-- Hero Section -->
+        <section id="hero">
+            <div style="max-width:1200px;margin:0 auto;padding:0 6vw;text-align:center">
+                <div class="reveal" data-reveal>
+                    <h1 style="font-size:48px;margin:0 0 20px;font-weight:700">About AKFIT</h1>
+                    <p style="font-size:20px;color:var(--muted);max-width:60ch;margin:0 auto 40px">Transforming lives through personalized fitness training and expert coaching since 2015</p>
                 </div>
 
-                <div class="text-block reveal" data-reveal>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, ratione! We combine modern
-                        training techniques, nutrition coaching, and real human support to help you reach your goals.
-                        Our trainers are certified and passionate about sustainable results.
-                    </p>
-                    <p>
-                        Whether you’re starting out or training for performance, our programs are built around you.
-                        Expect clear plans, small-group energy, and individual attention.
-                    </p>
-
-                    <div class="cta">
-                        <button class="btn" id="learnBtn">Learn More</button>
-                        <div class="small">Open hours: Mon–Sat • 6:00–22:00</div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:center">
+                    <div class="reveal" data-reveal>
+                        <img src="about.avif" alt="AKFIT Team" style="width:100%;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
+                    </div>
+                    <div class="reveal" data-reveal style="text-align:left">
+                        <h2 style="font-size:32px;margin:0 0 20px">Our Story</h2>
+                        <p style="font-size:16px;line-height:1.8;color:var(--muted);margin:0 0 30px">
+                            Founded with a vision to make professional fitness training accessible to everyone, AKFIT has been at the forefront of personalized fitness coaching. Our journey began in the vibrant landscape of Rajasthan, where we discovered the perfect blend of traditional wellness practices and modern exercise science.
+                        </p>
+                        <p style="font-size:16px;line-height:1.8;color:var(--muted);margin:0 0 30px">
+                            Today, we combine time-tested techniques with contemporary exercise science to deliver results that last a lifetime. Our certified trainers are passionate about creating sustainable fitness programs that help individuals achieve their health goals while building strength, endurance, and confidence.
+                        </p>
+                        <a href="PROJECT_CONTACT.html" class="gradient-animate" style="display:inline-block;padding:12px 24px;border-radius:8px;color:#012;text-decoration:none;font-weight:600">Start Your Journey</a>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="section-bg">
+            <div style="max-width:1000px;margin:0 auto;padding:0 6vw">
+                <div style="text-align:center;margin-bottom:60px">
+                    <h2 class="reveal" data-reveal>Our Impact</h2>
+                    <p class="reveal" data-reveal style="color:var(--muted);max-width:50ch;margin:0 auto">Numbers that speak louder than words</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-item reveal" data-reveal>
+                        <div class="stat-number">5000+</div>
+                        <div class="stat-label">Members Transformed</div>
+                    </div>
+                    <div class="stat-item reveal" data-reveal>
+                        <div class="stat-number">8+</div>
+                        <div class="stat-label">Years of Excellence</div>
+                    </div>
+                    <div class="stat-item reveal" data-reveal>
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Expert Trainers</div>
+                    </div>
+                    <div class="stat-item reveal" data-reveal>
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Client Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section>
+            <div style="max-width:1200px;margin:0 auto;padding:0 6vw">
+                <div style="text-align:center;margin-bottom:60px">
+                    <h2 class="reveal" data-reveal>Our Achievements</h2>
+                    <p class="reveal" data-reveal style="color:var(--muted);max-width:50ch;margin:0 auto">Recognition and milestones that drive us forward</p>
+                </div>
+
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px">
+                    <div class="achievement-card reveal" data-reveal>
+                        <div class="achievement-icon">🏆</div>
+                        <h3>Best Fitness Center 2023</h3>
+                        <div class="achievement-number">#1</div>
+                        <p style="color:var(--muted);font-size:14px">Voted best fitness center in Rajasthan by local fitness community</p>
+                    </div>
+                    <div class="achievement-card reveal" data-reveal>
+                        <div class="achievement-icon">⭐</div>
+                        <h3>5-Star Rated</h3>
+                        <div class="achievement-number">4.9/5</div>
+                        <p style="color:var(--muted);font-size:14px">Average rating from over 1,200 client reviews</p>
+                    </div>
+                    <div class="achievement-card reveal" data-reveal>
+                        <div class="achievement-icon">🤝</div>
+                        <h3>Community Choice</h3>
+                        <div class="achievement-number">2022</div>
+                        <p style="color:var(--muted);font-size:14px">Recognized for outstanding community service and support</p>
+                    </div>
+                    <div class="achievement-card reveal" data-reveal>
+                        <div class="achievement-icon">🎯</div>
+                        <h3>Results Guaranteed</h3>
+                        <div class="achievement-number">100%</div>
+                        <p style="color:var(--muted);font-size:14px">Money-back guarantee on all personal training programs</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section class="section-bg">
+            <div style="max-width:1200px;margin:0 auto;padding:0 6vw">
+                <div style="text-align:center;margin-bottom:60px">
+                    <h2 class="reveal" data-reveal>Professional Certifications</h2>
+                    <p class="reveal" data-reveal style="color:var(--muted);max-width:50ch;margin:0 auto">Our trainers hold internationally recognized certifications</p>
+                </div>
+
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+                    <div class="cert-card reveal" data-reveal>
+                        <div class="cert-title">NASM Certified Personal Trainer</div>
+                        <div class="cert-issuer">National Academy of Sports Medicine</div>
+                    </div>
+                    <div class="cert-card reveal" data-reveal>
+                        <div class="cert-title">ACSM Exercise Physiologist</div>
+                        <div class="cert-issuer">American College of Sports Medicine</div>
+                    </div>
+                    <div class="cert-card reveal" data-reveal>
+                        <div class="cert-title">Precision Nutrition Coach</div>
+                        <div class="cert-issuer">Precision Nutrition</div>
+                    </div>
+                    <div class="cert-card reveal" data-reveal>
+                        <div class="cert-title">FMS Functional Movement Screen</div>
+                        <div class="cert-issuer">Functional Movement Screen</div>
+                    </div>
+                    <div class="cert-card reveal" data-reveal>
+                        <div class="cert-title">TRX Suspension Training</div>
+                        <div class="cert-issuer">TRX Training</div>
+                    </div>
+                    <div class="cert-card reveal" data-reveal>
+                        <div class="cert-title">Olympic Weightlifting</div>
+                        <div class="cert-issuer">USA Weightlifting</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section>
+            <div style="max-width:1200px;margin:0 auto;padding:0 6vw">
+                <div style="text-align:center;margin-bottom:60px">
+                    <h2 class="reveal" data-reveal>Meet Our Expert Team</h2>
+                    <p class="reveal" data-reveal style="color:var(--muted);max-width:50ch;margin:0 auto">Passionate professionals dedicated to your success</p>
+                </div>
+
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px">
+                    <div class="team-card reveal" data-reveal>
+                        <div class="team-avatar">AS</div>
+                        <h3>Alex Smith</h3>
+                        <p class="team-specialty">Head Trainer & Founder</p>
+                        <p style="color:var(--muted);font-size:14px">15+ years experience in strength training and athletic performance. Specializes in powerlifting and injury prevention.</p>
+                    </div>
+                    <div class="team-card reveal" data-reveal>
+                        <div class="team-avatar">MJ</div>
+                        <h3>Maya Johnson</h3>
+                        <p class="team-specialty">Nutrition Specialist</p>
+                        <p style="color:var(--muted);font-size:14px">Certified nutritionist and wellness coach. Expert in sustainable weight management and healthy lifestyle habits.</p>
+                    </div>
+                    <div class="team-card reveal" data-reveal>
+                        <div class="team-avatar">CR</div>
+                        <h3>Carlos Rodriguez</h3>
+                        <p class="team-specialty">Performance Coach</p>
+                        <p style="color:var(--muted);font-size:14px">Former athlete turned trainer. Specializes in high-intensity workouts and cardiovascular conditioning.</p>
+                    </div>
+                    <div class="team-card reveal" data-reveal>
+                        <div class="team-avatar">SL</div>
+                        <h3>Sarah Lee</h3>
+                        <p class="team-specialty">Mobility Expert</p>
+                        <p style="color:var(--muted);font-size:14px">Yoga instructor and mobility specialist. Focuses on flexibility, recovery, and mind-body connection.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="section-bg">
+            <div style="max-width:1000px;margin:0 auto;padding:0 6vw;text-align:center">
+                <h2 class="reveal" data-reveal>Our Mission</h2>
+                <p class="reveal" data-reveal style="font-size:18px;color:var(--muted);max-width:70ch;margin:0 auto 40px">
+                    To empower individuals to achieve their fitness goals through personalized training, expert guidance, and unwavering support. We believe that everyone deserves access to professional fitness coaching that delivers real, sustainable results.
+                </p>
+                <div class="reveal" data-reveal>
+                    <a href="PROJECT_CONTACT.html" class="gradient-animate" style="display:inline-block;padding:16px 32px;border-radius:10px;color:#012;text-decoration:none;font-weight:700;font-size:16px">Join Our Community</a>
+                </div>
+            </div>
+        </section>
     </main>
 
     <script>
@@ -177,14 +390,99 @@
             }
         })();
 
-        // Optional: button click - smooth scroll to contact or more info
-        document.getElementById('learnBtn').addEventListener('click',function(){
-            // simple animation feedback
-            const btn = this;
-            btn.style.transform = 'scale(0.98)';
-            setTimeout(()=>btn.style.transform='',160);
-            alert('Thanks for your interest! Open the membership or contact page to learn more.');
+        // Background particles effect
+        (function(){
+            const particlesContainer = document.getElementById('particles');
+            if(particlesContainer){
+                const particleCount = 40;
+
+                for(let i = 0; i < particleCount; i++){
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+
+                    // random size between 2-5px
+                    const size = Math.random() * 3 + 2;
+                    particle.style.width = size + 'px';
+                    particle.style.height = size + 'px';
+
+                    // random position
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.top = Math.random() * 100 + '%';
+
+                    // random animation duration
+                    particle.style.animationDuration = (Math.random() * 10 + 8) + 's';
+
+                    // random colors between accent colors
+                    const colors = ['var(--accent)', 'var(--accent2)', 'rgba(255,255,255,0.08)'];
+                    particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+                    particlesContainer.appendChild(particle);
+                }
+            }
+        })();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
+
+        // Enhanced hover effects for cards
+        document.querySelectorAll('.achievement-card, .cert-card, .team-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = this.style.transform || 'translateY(0px)';
+            });
+        });
+
+        // Add click effects to CTA buttons
+        document.querySelectorAll('.gradient-animate').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.pointerEvents = 'none';
+
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 

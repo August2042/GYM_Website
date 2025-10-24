@@ -12,9 +12,10 @@
     a{color:inherit}
 
     /* top nav */
-    .topbar{position:fixed;inset:0 0 auto 0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:18px 28px;background:linear-gradient(180deg,rgba(0,0,0,0.18),transparent);backdrop-filter:blur(6px)}
-    .brand{font-weight:700;letter-spacing:1px}
-    .topbar a{margin-left:16px;text-decoration:none;padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04)}
+    .topbar{position:fixed;inset:0 0 auto 0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:18px 28px;background:linear-gradient(180deg,rgba(8,18,38,0.95),rgba(8,18,38,0.85));backdrop-filter:blur(10px);border-bottom:1px solid rgba(34,193,195,0.2)}
+    .brand{font-weight:700;letter-spacing:1px;color:var(--accent);font-size:24px}
+    .topbar a{margin-left:16px;text-decoration:none;padding:10px 16px;border-radius:8px;border:1px solid rgba(34,193,195,0.3);color:#fff;font-weight:500;transition:all 0.3s ease}
+    .topbar a:hover{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#012;border-color:var(--accent2);transform:translateY(-2px)}
 
     /* sections container uses scroll-snap for full-screen feel */
     main{height:100vh;overflow-y:auto;scroll-snap-type:y mandatory}
